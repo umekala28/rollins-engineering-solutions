@@ -20,13 +20,37 @@
 
   <!-- NAVBAR -->
   <header class="navbar">
-    <nav class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="projects.html" class="nav-link">Projects</a>
-      <a href="about.html" class="nav-link active">About</a>
-    </nav>
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-top">ROLLINS ENGINEERING</span>
+          <span class="logo-bottom">SOLUTIONS</span>
+        </a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="about.html" class="nav-link active">About</a>      
+      </nav>
+      <!-- Burger for the Mobile -->
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+    </div>
   </header>
 
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+  </script>
+  
   <main class="about-page">
 
     <!-- MEET THE TEAM -->
