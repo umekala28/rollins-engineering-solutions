@@ -1,6 +1,14 @@
 /* ===============================
             MAIN
 =============================== */
+:root {
+  --accent-gold: #e5c27a;
+  --text-light: #ffffff;
+
+  --font-heading: "Timmana", sans-serif;
+  --font-subheading: "Ubuntu Sans Mono", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,28 +34,62 @@ body {
   margin: 0 auto;
 }
 
-/* NAVBAR */
+/* UPDATED NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-
-  padding: 32px 64px;
   background: rgba(11, 19, 36, 0.65);
-  backdrop-filter: blur(10px);
-
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* For better cross-browser compatibility */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 64px 20px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.logo-top {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.logo-bottom {
+  font-family: var(--font-subheading);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
 }
 
 .nav-links {
   display: flex;
   justify-content: flex-end;
+  gap: 40px;
   align-items: center;
 }
 
 .nav-links a {
-  font-family: "Ubuntu Sans Mono", "sans-serif";
+  font-family: var(--font-subheading);
   color: white;
   text-decoration: none;
   font-size: 18px;
@@ -68,6 +110,94 @@ body {
   height: 2px;
   background-color: #e5c27a;
 }
+
+/* NAV BAR FOR MOBILE */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  z-index: 1001; /* Keeps it above the dropdown menu */
+}
+
+.hamburger .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent-gold);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  left: 0;
+}
+
+/* Positioning the three lines */
+.hamburger .bar:nth-child(1) { top: 0; }
+.hamburger .bar:nth-child(2) { top: 10px; }
+.hamburger .bar:nth-child(3) { top: 20px; }
+
+@media (max-width: 1150px) {
+  .card {
+    width: 100%;
+    max-width: 380px; 
+  }
+}
+@media (max-width: 900px) {
+  .nav-container {
+    padding: 16px 32px;
+  }
+  
+  /* Show the Hamburger Icon */
+  .hamburger {
+    display: block;
+  }
+
+  /* style the Links as a Mobile Dropdown */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 19, 36, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    display: none; 
+    flex-direction: column;
+    align-items: center; /* Center the links in the dropdown */
+    padding: 30px 0;
+    gap: 30px;  
+  }
+
+  /* fyi: This class is added by JavaScript when the hamburger is clicked */
+  .nav-links.show {
+    display: flex !important;
+  }
+  .nav-links a {
+    margin-left: 0; /* Remove the desktop margin */
+    font-size: 22px; /* Make text larger for tapping */
+  }
+  .nav-link::after {
+    display: none;
+  }
+
+  /* scaling downs for mobile */
+  .hero-title, .projects-title {
+    font-size: 48px; 
+    white-space: normal; 
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr; 
+    gap: 32px;
+  }
+  
+  .cycle-panel, .team-panel, .accomplishments {
+    padding: 64px 32px; 
+  }
+}  
 
 
 /* HERO */
@@ -129,6 +259,7 @@ body {
 /* CARDS */
 .cards {
   display: flex;
+  flex-wrap: wrap; /* allows to be seen on smaller screens */
   justify-content: center;
   gap: 32px;
 
@@ -141,7 +272,7 @@ body {
 
 .card {
   background-color: #2453d6;
-  width: 380px;
+  width: 350px; /* so containers can fit */
   height: 240px;
 
   padding: 30px 34px;
@@ -152,6 +283,21 @@ body {
 
   display: flex;
   flex-direction: column;
+}
+
+/* for mobile responses (or smaller viewports) */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    max-width: 380px; /* expand a bit when stacked */
+  }
+  .hero-title {
+    font-size: 48px;
+    white-space: normal; /* overriding prev condition for mobile */
+  }
+  .navbar {
+    padding: 16px 24px;
+  }
 }
 
 .card h3 {
